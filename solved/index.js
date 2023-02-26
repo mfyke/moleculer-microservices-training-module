@@ -40,12 +40,63 @@ brokerNode1.createService({
 
 // Create the broker for node with id "node-2" and use NATS as transporter
 const brokerNode2 = new ServiceBroker({
-  nodeID: "node-2",
+  nodeID:"node-2",
   transporter: "NATS"
 });
 
-// Create the "db" service in "node-2"
+// Create the "products" service in "node-2"
 brokerNode2.createService({
+  name:"products",
+  // Define actions, which are public methods of the service that can be called externally
+  actions: {
+    // Called for our GET /api/products route
+    async listProducts(ctx) {
+      const products = await brokerNode3.call("db.find");
+      return products;
+    },
+    // Called for our GET /api/products/:id route
+    async findProduct(ctx) {
+      const product = await brokerNode3.call("db.get", { id: ctx.params.id });
+      return product;
+    },
+    // Called for our POST /api/products route
+    async createProduct(ctx) {
+      const product = await brokerNode3.call("db.create", { name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
+      return [ { message: "Product created!" }, product ];
+    },
+    // Called for our PUT /api/products/:id route
+    async updateProduct(ctx) {
+      const product = await brokerNode3.call("db.update", { id: ctx.params.id, name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
+      return [ { message: "Product updated!" }, product ];
+    },
+    // Called for our DELETE /api/products/:id route
+    async deleteProduct(ctx) {
+      const product = await brokerNode3.call("db.remove", { id: ctx.params.id });
+      return [ { message: "Product deleted!" }, product ];
+    },
+    // Called for our POST /api/products/seed route
+    async seedProducts(ctx) {
+      await brokerNode3.call("db.create", { name: "baseball", price: 5.99, quantity: 100 });
+      await brokerNode3.call("db.create", { name: "magazine", price: 3.99, quantity: 123 });
+      await brokerNode3.call("db.create", { name: "comb", price: 2.25, quantity: 1560 });
+      await brokerNode3.call("db.create", { name: "hat", price: 10.99, quantity: 164 });
+      return { message: "Products seeded!" };
+    }
+  },
+  // Service will not start until "db" service is started
+  dependencies: [
+    "db"
+  ]
+});
+
+// Create the broker for node with id "node-3" and use NATS as transporter
+const brokerNode3 = new ServiceBroker({
+  nodeID: "node-3",
+  transporter: "NATS"
+});
+
+// Create the "db" service in "node-3"
+brokerNode3.createService({
   name: "db",
   // properties present in the "DbService" are mixed in to our "db" service
   mixins: [DbService],
@@ -72,57 +123,6 @@ brokerNode2.createService({
     }
   }
 })
-
-// Create the broker for node with id "node-3" and use NATS as transporter
-const brokerNode3 = new ServiceBroker({
-  nodeID:"node-3",
-  transporter: "NATS"
-});
-
-// Create the "products" service in "node-3"
-brokerNode3.createService({
-  name:"products",
-  // Define actions, which are public methods of the service that can be called externally
-  actions: {
-    // Called for our GET /api/products route
-    async listProducts(ctx) {
-      const products = await brokerNode2.call("db.find");
-      return products;
-    },
-    // Called for our GET /api/products/:id route
-    async findProduct(ctx) {
-      const product = await brokerNode2.call("db.get", { id: ctx.params.id });
-      return product;
-    },
-    // Called for our POST /api/products route
-    async createProduct(ctx) {
-      const product = await brokerNode2.call("db.create", { name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
-      return [ { message: "Product created!" }, product ];
-    },
-    // Called for our PUT /api/products/:id route
-    async updateProduct(ctx) {
-      const product = await brokerNode2.call("db.update", { id: ctx.params.id, name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
-      return [ { message: "Product updated!" }, product ];
-    },
-    // Called for our DELETE /api/products/:id route
-    async deleteProduct(ctx) {
-      const product = await brokerNode2.call("db.remove", { id: ctx.params.id });
-      return [ { message: "Product deleted!" }, product ];
-    },
-    // Called for our POST /api/products/seed route
-    async seedProducts(ctx) {
-      await brokerNode2.call("db.create", { name: "baseball", price: 5.99, quantity: 100 });
-      await brokerNode2.call("db.create", { name: "magazine", price: 3.99, quantity: 123 });
-      await brokerNode2.call("db.create", { name: "comb", price: 2.25, quantity: 1560 });
-      await brokerNode2.call("db.create", { name: "hat", price: 10.99, quantity: 164 });
-      return { message: "Products seeded!" };
-    }
-  },
-  // Service will not start until "db" service is started
-  dependencies: [
-    "db"
-  ]
-});
 
 // Start all brokers
 Promise.all([brokerNode1.start(), brokerNode2.start(), brokerNode3.start()]);
