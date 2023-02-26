@@ -50,7 +50,7 @@ brokerNode2.createService({
   // properties present in the "DbService" are mixed in to our "db" service
   mixins: [DbService],
   // add in adapter for Sequelize and provide: db name, user name, password, and options object
-  adapter: new SqlAdapter('shop_db', 'root', 'rootroot', {
+  adapter: new SqlAdapter('shop_db', '<insert username>', '<insert password>', {
     host: 'localhost',
     dialect: 'mysql',
     dialectOptions: {
