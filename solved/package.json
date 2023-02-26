@@ -14,6 +14,7 @@
     "moleculer-db-adapter-sequelize": "^0.2.15",
     "moleculer-web": "^0.10.5",
     "mysql2": "^3.1.2",
-    "nats": "^2.12.1"
+    "nats": "^2.12.1",
+    "sequelize": "^6.29.0"
   }
 }
