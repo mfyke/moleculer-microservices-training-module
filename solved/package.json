@@ -1,0 +1,19 @@
+{
+  "name": "moleculer-microservices-training",
+  "version": "1.0.0",
+  "description": "Short training on writing microservices using the node microservices framework Moleculer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mfyke",
+  "license": "ISC",
+  "dependencies": {
+    "moleculer": "^0.14.28",
+    "moleculer-db": "^0.8.23",
+    "moleculer-db-adapter-sequelize": "^0.2.15",
+    "moleculer-web": "^0.10.5",
+    "mysql2": "^3.1.2",
+    "nats": "^2.12.1"
+  }
+}
