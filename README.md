@@ -198,7 +198,7 @@ Next, we will configure a NATS server to serve as the transporter which sends me
 
 * Notice here that we have added `HTTPServer` to our `mixins` array. This means that this service will have all of the features from the `HTTPServer` service, which is the default export from `moleculer-web`. Any changes made after the `mixins` property will overwrite the existing configuration inherited from the mixed in service.
 
-* We have also added a `routes` array to our `settings` object. By default, the base URL will be `http://localhost:3000`. We have added `/api` to the base path and setup an `action` that will be called when there is a request to `GET /api/products`. An `action` is a publicly callable method of a service. By specifying `products.listProducts`, we are saying call the `listProducts` action from the `products` service. The `listProducts` action and the `products` service has not yet been defined, we will do that next.
+* We have also added a `routes` array to our `settings` object. By default, the base URL will be `http://localhost:3000`. We have added `/api` to the base path and setup an `action` that will be called when there is a request to `GET /api/products`. An `action` is a publicly callable method of a service. By specifying `products.listProducts`, we are saying call the `listProducts` action from the `products` service. The `listProducts` action and the `products` service have not yet been defined, we will do that next.
 
 ### Create Node with Initial Products Service
 
