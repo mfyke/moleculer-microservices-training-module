@@ -44,7 +44,7 @@ By the end of this module, learners should be able to:
 
 * Create a CRUD application using the Moleculer framework that implements the concepts of microservices
 
-## Definition of and Benefits of Microservices
+## Definition, Benefits, and Drawbacks of Microservices
 
 A microservices architecture means that an application is composed of small, loosely coupled, and independent services. Services can be updated and changed without needing to redeploy the entire application.
 
