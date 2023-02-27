@@ -56,7 +56,7 @@ Microservice architecture usually also includes the following:
 
 Some of the benefits of microservices include:
 
-* Agility - Services can be updated without redeploying entire application.
+* Agility - Services can be updated without redeploying the entire application.
 
 * Scalability - Services can be scaled independently allowing for resources to be used more efficiently.
 
@@ -120,11 +120,11 @@ The application structure will match the following image:
 
 ## Build Initial Application with a Gateway Service and Products Service
 
-### Setup Project
+### Set Up Project
 
-* Create folder called `app` and a javascript file called `index.js`.
+* Create a folder called `app` and a javascript file called `index.js`.
 
-* Add a `package.json` within app by running the `npm init` command using default values.
+* Add a `package.json` within the `app` folder by running the `npm init` command using default values.
 
 * Run the following command to add all necessary npm packages:
 
@@ -198,11 +198,11 @@ Next, we will configure a NATS server to serve as the transporter which sends me
 
 * Notice here that we have added `HTTPServer` to our `mixins` array. This means that this service will have all of the features from the `HTTPServer` service, which is the default export from `moleculer-web`. Any changes made after the `mixins` property will overwrite the existing configuration inherited from the mixed in service.
 
-* We have also added a `routes` array to our `settings` object. By default, the base URL will be `http://localhost:3000`. We have added `/api` to the base path and setup an `action` that will be called when there is a request to `GET /api/products`. An `action` is a publicly callable method of a service. By specifying `products.listProducts`, we are saying call the `listProducts` action from the `products` service. The `listProducts` action and the `products` service have not yet been defined, we will do that next.
+* We have also added a `routes` array to our `settings` object. By default, the base URL will be `http://localhost:3000`. We have added `/api` to the base path and set up an `action` that will be called when there is a request to `GET /api/products`. An `action` is a publicly callable method of a service. By specifying `products.listProducts`, we are saying call the `listProducts` action from the `products` service. The `listProducts` action and the `products` service have not yet been defined, we will do that next.
 
 ### Create Node with Initial Products Service
 
-Add the following code to create a `ServiceBroker` for `node-2` and setup our initial `products` service:
+Add the following code to create a `ServiceBroker` for `node-2` and set up our initial `products` service:
 
 ```js
 // Create the broker for node with id "node-2" and use NATS as transporter
@@ -246,9 +246,9 @@ brokerNode2.createService({
 
 ## Add and Integrate DB Service Using a Sequelize Adapter
 
-### Setup DB Service
+### Set Up DB Service
 
-* First add the following code to create a `ServiceBroker` for `node-3` and setup our `db` service:
+* First add the following code to create a `ServiceBroker` for `node-3` and set up our `db` service:
 
   ```js
   // Create the broker for node with id "node-3" and use NATS as transporter
@@ -653,4 +653,4 @@ When finished with the app, use the following steps to clean up Docker resources
 
 ## Recap
 
-Great job completing this module! You learned what microservices are and some of the benefits and drawbacks of using microservice architecture. You looked at some of the core concepts of the Moleculer framework. You finished off the module with a hands-on build of a CRUD app is made up of a gateway service, a products service, and a db service each running on their own node.
+Great job completing this module! You learned what microservices are and some of the benefits and drawbacks of using microservice architecture. You looked at some of the core concepts of the Moleculer framework. You finished off the module with a hands-on build of a CRUD app made up of a gateway service, a products service, and a db service each running on their own node.
