@@ -307,8 +307,6 @@ brokerNode2.createService({
       mysql -u <insert username> -p
       ```
 
-    * You will most likely want to use `root` as your username.
-
     * Enter password when prompted after issuing this command.
 
     * Type the following statement to create the database named `shop_db`:
