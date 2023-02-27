@@ -1,4 +1,4 @@
-# Module: Writing Microservices with Molecular
+# Module: Microservices with Molecular
 
 ## Prerequisite Knowledge and Tools
 
@@ -236,7 +236,7 @@ brokerNode2.createService({
   Promise.all([brokerNode1.start(), brokerNode2.start()]);
   ```
 
-* This code starts both of our Service Brokers and essentially starts the application.
+* This code starts both of our Service Brokers and starts the application.
 
 * Run the application by running `node index.js` in the terminal.
 
@@ -248,7 +248,7 @@ brokerNode2.createService({
 
 ### Setup DB Service
 
-* First add the following code to create a `ServiceBroker` for `node-2` and setup our `db` service:
+* First add the following code to create a `ServiceBroker` for `node-3` and setup our `db` service:
 
   ```js
   // Create the broker for node with id "node-3" and use NATS as transporter
@@ -297,7 +297,7 @@ brokerNode2.createService({
 
 * Make sure to replace `<insert username>` and `<insert password>` your MySQL username and password for your MySQL instance running on the default port `3306`.
 
-* You will also need to create the db called `shop_db`.
+* You will also need to create a db called `shop_db`.
 
   * To do so, do the following:
 
