@@ -24,13 +24,13 @@ In order to run this completed app, you will need the following to be configured
 
 #### Instructions for existing MySQL installation
 
-* The `db` service in the app connects to MySQL via a `Sequelize` connection.
+* The db service in the app connects to MySQL via a Sequelize connection.
 
 * Within `index.js`, make sure to replace the template `<insert username>` and `<insert password>` with your MySQL username and password for your MySQL instance running on the default port `3306`.
 
 * You must also create a database in your MySQL instance called `shop_db`. To do so, follow these steps:
 
-  * Log into the `mysql` CLI by entering in the terminal:
+  * Log into the mysql CLI by entering in the terminal:
 
     ```bash
     mysql -u <insert username> -p

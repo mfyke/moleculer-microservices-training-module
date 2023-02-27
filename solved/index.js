@@ -51,35 +51,35 @@ brokerNode2.createService({
   actions: {
     // Called for our GET /api/products route
     async listProducts(ctx) {
-      const products = await brokerNode3.call("db.find");
+      const products = await brokerNode2.call("db.find");
       return products;
     },
     // Called for our GET /api/products/:id route
     async findProduct(ctx) {
-      const product = await brokerNode3.call("db.get", { id: ctx.params.id });
+      const product = await brokerNode2.call("db.get", { id: ctx.params.id });
       return product;
     },
     // Called for our POST /api/products route
     async createProduct(ctx) {
-      const product = await brokerNode3.call("db.create", { name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
+      const product = await brokerNode2.call("db.create", { name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
       return [ { message: "Product created!" }, product ];
     },
     // Called for our PUT /api/products/:id route
     async updateProduct(ctx) {
-      const product = await brokerNode3.call("db.update", { id: ctx.params.id, name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
+      const product = await brokerNode2.call("db.update", { id: ctx.params.id, name: ctx.params.name, price: ctx.params.price, quantity: ctx.params.quantity });
       return [ { message: "Product updated!" }, product ];
     },
     // Called for our DELETE /api/products/:id route
     async deleteProduct(ctx) {
-      const product = await brokerNode3.call("db.remove", { id: ctx.params.id });
+      const product = await brokerNode2.call("db.remove", { id: ctx.params.id });
       return [ { message: "Product deleted!" }, product ];
     },
     // Called for our POST /api/products/seed route
     async seedProducts(ctx) {
-      await brokerNode3.call("db.create", { name: "baseball", price: 5.99, quantity: 100 });
-      await brokerNode3.call("db.create", { name: "magazine", price: 3.99, quantity: 123 });
-      await brokerNode3.call("db.create", { name: "comb", price: 2.25, quantity: 1560 });
-      await brokerNode3.call("db.create", { name: "hat", price: 10.99, quantity: 164 });
+      await brokerNode2.call("db.create", { name: "baseball", price: 5.99, quantity: 100 });
+      await brokerNode2.call("db.create", { name: "magazine", price: 3.99, quantity: 123 });
+      await brokerNode2.call("db.create", { name: "comb", price: 2.25, quantity: 1560 });
+      await brokerNode2.call("db.create", { name: "hat", price: 10.99, quantity: 164 });
       return { message: "Products seeded!" };
     }
   },
